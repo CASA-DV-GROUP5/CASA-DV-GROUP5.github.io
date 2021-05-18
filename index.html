@@ -1,148 +1,135 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" class="fp-enabled" style="overflow: visible; height: initial;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        
-        
-        
-    <title> CASA-DV-GROUP5</title>
-        
-    <!-- Required meta tags -->
+<html lang="en">
 
-    <!--  Bootstrap, General Styling and Icons     -->
+<head>
 
-    <link rel="stylesheet" type="text/css" href="fullpage.css" />       
-    <link rel="stylesheet" type="text/css" href="examples.css" />
-    
-    
-    <!-- Material Kit CSS, JQuery -->
-    <script type="text/javascript" src="fullpage.js"></script>
-    <script type="text/javascript" src="examples.js"></script>
-    <script charset="utf-8" src="https://platform.twitter.com/js/button.5573c974dc31bbdab5ea7923a0bd5cf3.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+  <title>CASA-group5</title>
+  <!-- Bootstrap core JavaScript -->
+  <script src="jquery.min.js"></script>
+  <script src="bootstrap.bundle.min.js"></script>
+
+  <!-- Plugin JavaScript -->
+  <script src="jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for this template -->
+  <script src="grayscale.min.js"> </script>
+  <!-- Bootstrap core CSS -->
+  <link href="bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom fonts for this template -->
+  <link href="all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+    rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="grayscale.css" rel="stylesheet">
+
+  <style type="text/css">
+    .img-fluid {
+      max-width: 100%;
+      height: 400 px;
+    }
+  </style>
     <style>
-		#actions{
-			position:fixed;
-			top: 73px;
-			left: 30px;
-			z-index: 99999;
-		}
-		#actions a{
-			background: rgba(0,0,0,0.8);
-			padding: 7px;
-			margin: 2px;
-			color: #ccc;
-			display: inline-block;
-		}
-		#actions a:hover{
-			color: #fff;
-			background: #81A140;
-		}
+        .container{
+            background:white;
+              opacity: 1;
+        }
 
-		.fp-controlArrow.fp-prev {
-			left: 50px;
-		}
-		.fp-controlArrow.fp-next{
-			right: 50px;
-		}
-        
-	</style>         
-        
-    </head>
+    </style>
 
-    
-    <body>
- <body class="fp-responsive fp-viewing-secondPage-0" style="overflow: visible; height: initial;" data-new-gr-c-s-check-loaded="14.1011.0" data-gr-ext-installed="">       
-  
-     
-    
- 
-<ul id="menu">
-	<li data-menuanchor="1"><a href= "main.html">introduction</a></li>
-    <li data-menuanchor="2"><a href= "Waste.html">waste-1</a></li>
-	<li data-menuanchor="3"><a href="recycle.html">waster-2</a></li>
-	<li data-menuanchor="4"><a href="energy.html">emission-1</a></li>
-    <li data-menuanchor="5"><a href="2.5d.html">emission-2</a></li>
-    <li data-menuanchor="6"><a href="energy.html">energy</a></li>
+</head>
 
-</ul>   
-    
-    
-    
-   <div id="1" style="height: 100vh; padding: 0px 0;" class="section" data-hash="b">
-                <iframe id="index" src="main.html" style="background: rgba(0,0,0,0.84);" height="100%" width="100%;" frameborder="0" scrolling="no"></iframe>
+<body id="page-top" data-new-gr-c-s-check-loaded="14.1010.0" data-gr-ext-installed="">
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand js-scroll-trigger" href="#1">Home</a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+        data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+        aria-label="Toggle navigation">
+        Menu
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#2">Background</a>
+          </li>
+            <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#3">Waste</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#4">Waste(boroughs level)</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#5">Emissions</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#6">Emissions(borough level)</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#7">Emissions(grid level)</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#8">Energy</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#9">Project Information</a>
+          </li>
+
+        </ul>
+      </div>
     </div>
+  </nav>
 
-    <div id="2" style="height: 100vh; padding: 0px 0;" class="section" data-hash="b">
-                <iframe id="index" src="Waste.html" style="background: rgba(0,0,0,0.84);" height="100%" width="100%;" frameborder="0" scrolling="no"></iframe>
-    </div>    
+
+ 
+  <section id="1">
+    <iframe src="introduction.html" height="100%" width="100%" frameBorder="1" scrolling="no"></iframe>
+  </section>
+
+  <section id="2">
+    <iframe src="policy.html" height="100%" width="100%" frameBorder="1" scrolling="no"></iframe>
+  </section>
+
+  <section id="3">
+    <iframe src="Waste.html" height="722px" width="100%" frameBorder="1" scrolling="no"></iframe>
+  </section>
+
+  <section id="4">
+    <iframe src="recycle.html" height="722px" width="100%" frameBorder="1"
+      scrolling="no"></iframe>
+  </section>
+  
+ <section id="5">
+    <iframe src="total_emission.html" height="100%" width="100%" frameBorder="1"
+      scrolling="no"></iframe>
+  </section>
+  
+ <section id="6">
+    <iframe src="emission_borough.html" height="722px" width="100%" frameBorder="1" scrolling="no"></iframe>
+  </section>
+
+  <section id="7">
+    <iframe src="2.5d.html" height="722px" width="100%" frameBorder="1" scrolling="yes"></iframe>
+  </section>
     
-    <div id="3" style="height: 100vh; padding: 0px 0;" class="section" data-hash="b">
-                <iframe id="index" src="recycle.html" style="background: rgba(0,0,0,0.84);" height="100%" width="100%;" frameborder="0" scrolling="no"></iframe>
-    </div>  
-    
-    <div id="4" style="height: 100vh; padding: 0px 0;" class="section" data-hash="b">
-                <iframe id="index" src="emission_borough.html" style="background: rgba(0,0,0,0.84);" height="100%" width="100%;" frameborder="0" scrolling="no"></iframe>
-    </div>  
-    <div id="5" style="height: 100vh; padding: 0px 0;" class="section" data-hash="b">
-                <iframe id="index" src="2.5d.html" style="background: rgba(0,0,0,0.84);" height="100%" width="100%;" frameborder="0" scrolling="no"></iframe>
-    </div>  
-    <div id="6" style="height: 100vh; padding: 0px 0;" class="section" data-hash="b">
-                <iframe id="index" src="energy.html" style="background: rgba(0,0,0,0.84);" height="100%" width="100%;" frameborder="0" scrolling="no"></iframe>
-    </div>  
-    
-    
+  <section id="8">
+    <iframe src="energy.html" height="722px" width="100%" frameBorder="1" scrolling="yes"></iframe>
+    </section>
 
-    
-    
-     
-    
-    
-    </body>
-       
-    
-
-
-    
-    
+  <section id="9">
+    <iframe src="conclusion.html" height="722px" width="100%" frameBorder="1" scrolling="yes"></iframe>
+    </section>
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</body>
 
 </html>

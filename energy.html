@@ -43,7 +43,8 @@
     text-decoration: none;
     color: #2DC4B2;
   }
-   .row {
+   #iframe-shrink{transform:scale();left: -400px;top: -170px;}
+    .row {
     height: 12px;
     width: 100%;
   }
@@ -71,7 +72,7 @@
   }
     
    .wrapper{
-        position: absolute;
+        position: relative;
         margin: 10px;
         width: 240px;
         background-color: white;
@@ -91,9 +92,9 @@
         position: absolute;
         background-color: Gainsboro;
         right: 20px;
-        top: 400px;
-        width: 270px;
-        height: 270px;
+        top: 320px;
+        width: 350px;
+        height: 360px;
         padding: 10px;
   }
         .note{
@@ -222,7 +223,7 @@
               "fill-color": {
                 property: `ratio_${this.beforeYear}`,
                 stops:  [
-                    [0.2, '#2636D9'],
+                  [0.2, '#2636D9'],
                   [0.4,'#2674D9'],
                   [0.6,'#7126D9'],
                   [0.8, '#D926D9'],
@@ -330,10 +331,9 @@
       App.init();
     </script>
       <div class="echart-view" id="note">
-       <h2>Tips: The reason why we choosing the  indicator of DIESEL cars/PETROL cars</h2>
-          <h4><img src="maxresdefault.jpg" style="width:160px;height:110px;position: relative;left:5px;top:0px;" /></h4>
-          <h4>Diesel has been promoted as a more environmentally friendly fuel. Diesel engines are "lean burn", which means they use less fuel to achieve the same performance as gasoline engines.</h4>
-      </div>
+          <iframe id="iframe-shrink"  src="speed.html" height="280px" width="350px" frameBorder="0" scrolling="no"></iframe> 
+          <p>Because of the global economic downturn and the riots of 2011, the speed rate of Bioenergy and waste decline sharply.</p>
+          </div>
      
   </body>
 </html>
