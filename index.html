@@ -1,397 +1,135 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <title>compare</title>
-    <meta
-      name="viewport"
-      content="initial-scale=1,maximum-scale=1,user-scalable=no"
-    />
-    <link href="https://api.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-compare/v0.4.0/mapbox-gl-compare.css" type="text/css">
-    <script type="text/javascript" src="./static/jquery.js"></script>
-    <script src="https://api.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.js"></script>
-    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-compare/v0.4.0/mapbox-gl-compare.js"></script>
-    <script charset="utf-8" src="https://d3js.org/d3.v4.min.js"></script>
-    <!-- <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script> -->
-    <script charset="utf-8" src="https://cdnjs.cloudflare.com/ajax/libs/dimple/2.3.0/dimple.latest.min.js"></script>
-    <script type="text/javascript" src="https://lib.baomitu.com/echarts/4.9.0-rc.1/echarts.js"></script>
-    <script type="text/javascript" src="./static/geojson.js"></script>
-    <style>
-      html, body {
-        width: 100%;
-        height: 100%;
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-      }
-      .map {
-        position: absolute;
-        height: 100%;
-        width: 100%;
-        overflow: hidden;
-      }
-    
-      .wrapper{
-        position: absolute;
-        padding: 10px;
-        background: #fff;
-        top: 20px;
-        left: 20px;
-      }
-      .wrapper .title{
-        font-size: 18px;
-        margin-bottom: 10px;
-      }
-      .wrapper .slider:first-child{
-        margin-bottom: 20px;
-      }
+<html lang="en">
 
-      .echart-view{
-        position: absolute;
-        right: 20px;
-        top: 20px;
-        width: 300px;
-        height: 300px;
-        padding: 10px;
-      }
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <title>CASA-group5</title>
+  <!-- Bootstrap core JavaScript -->
+  <script src="jquery.min.js"></script>
+  <script src="bootstrap.bundle.min.js"></script>
+
+  <!-- Plugin JavaScript -->
+  <script src="jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for this template -->
+  <script src="grayscale.min.js"> </script>
+  <!-- Bootstrap core CSS -->
+  <link href="bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom fonts for this template -->
+  <link href="all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+    rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="grayscale.css" rel="stylesheet">
+
+  <style type="text/css">
+    .img-fluid {
+      max-width: 100%;
+      height: 400 px;
+    }
+  </style>
+    <style>
+        .container{
+            background:white;
+              opacity: 1;
+        }
 
     </style>
-  </head>
 
-  <body>
-    <div id="comparison-container">
-      <div id="before" class="map"></div>
-      <div id="after" class="map"></div>
-    </div>
-    <div class="wrapper">
-      <div class="title">XXXXXXXX</div>
-      <div class="slider">
-        <div>Before</div>
-        <div class="slider-bar">
-          <input style="width:200px" id='slider1' type='range' min='2002' max='2007' step='1' value='2002' list='tickmarks' />
-          <span class="slider-value1">2002</span>
-        </div>
+</head>
+
+<body id="page-top" data-new-gr-c-s-check-loaded="14.1010.0" data-gr-ext-installed="">
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand js-scroll-trigger" href="#1">Home</a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+        data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+        aria-label="Toggle navigation">
+        Menu
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#2">Background</a>
+          </li>
+            <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#3">Waste</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#4">Waste(boroughs level)</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#5">Emissions</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#6">Emissions(borough level)</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#7">Emissions(grid level)</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#8">Energy</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#9">Project Information</a>
+          </li>
+
+        </ul>
       </div>
-      <div class="slider">
-        <div>After</div>
-        <div class="slider-bar">
-          <input style="width:200px" id='slider2' type='range' min='2008' max='2013' step='1' value='2008' list='tickmarks' />
-          <span class="slider-value2">2008</span>
-        </div>
-      </div>
-      <div></div>
     </div>
-    <div class="echart-view" id="chart"></div>
-    <script>
-      const App = {
-        init: function () {
-          this.beforeYear = 2002;
-          this.afterYear = 2008;
-          this.bindEvents();
-          this.initMap();
-          this.initChart();
-        },
-        initChart: function(){
-          this.myChart = echarts.init(document.getElementById('chart'));
-          const option =  {
-          backgroundColor: '#fff',
-          tooltip: {
-            trigger: 'axis',
-            axisPointer: {
-              lineStyle: {
-                color: {
-                  type: 'linear',
-                  x: 0,
-                  y: 0,
-                  x2: 0,
-                  y2: 1,
-                  colorStops: [{
-                      offset: 0,
-                      color: 'rgba(0, 255, 233,0)'
-                  }, {
-                      offset: 0.5,
-                      color: 'rgba(255, 255, 255,1)',
-                  }, {
-                      offset: 1,
-                      color: 'rgba(0, 255, 233,0)'
-                  }],
-                  global: false
-                }
-              }
-            },
-            formatter: (params) => {
-              return `<div>ratio: ${(params[0].value).toFixed(4)}</div>`
-            }
-          },
-          grid: {
-            top: '15%',
-            left: '15%',
-            right: '5%',
-            bottom: '15%'
-          },
-          xAxis: [{
-            type: 'category',
-            axisLine: {
-                show: true
-            },
-            splitArea: {
-              color: '#f00',
-              lineStyle: {
-                color: '#f00'
-              },
-            },
-            axisLabel: {
-              color: '#000'
-            },
-            splitLine: {
-                show: false
-            },
-            boundaryGap: false,
-            data: [2002, 2003, 2004, 2005, 2006, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013]
-          }],
-          yAxis: [{
-            type: 'value',
-            name: 'ratio',
-            min: 0.08,
-            max: 0.1,
-            splitNumber: 4,
-            splitLine: {
-              show: true,
-              lineStyle: {
-                color: 'rgba(255,255,255,0.1)'
-              }
-            },
-            axisLine: {
-              show: true
-            },
-            axisLabel: {
-              show: true,
-              margin: 20,
-              textStyle: {
-                color: '#000'
-              },
-            },
-            axisTick: {
-              show: false,
-            },
-          }],
-          series: [{
-            name: 'ratio',
-            type: 'line',
-            smooth: true, //是否平滑
-            showAllSymbol: false,
-            symbol: 'circle',
-            symbolSize: 15,
-            label: {
-              show: false,
-              position: 'top',
-              textStyle: {
-                color: '#00b3f4'
-              }
-            },
-            itemStyle: {
-              color: "#00b3f4",
-              borderColor: "#fff",
-              borderWidth: 3,
-              shadowColor: 'rgba(0, 0, 0, .3)',
-              shadowBlur: 0,
-              shadowOffsetY: 2,
-              shadowOffsetX: 2
-            },
-            tooltip: {
-                show: true
-            },
-            areaStyle: {
-              normal: {
-                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                    offset: 0,
-                    color: 'rgba(0,179,244,0.3)'
-                  },
-                  {
-                    offset: 1,
-                    color: 'rgba(0,179,244,0)'
-                  }
-                ], false),
-              }
-            },
-            data: [0.08132865, 0.084739134, 0.086569239, 0.090149011, 0.094759455, 0.098030684, 0.096764763, 0.099229262, 0.098782928, 0.099031495, 0.096290185, 0.095626133]
-        }
-          ]};
-          this.myChart.setOption(option);
-        },
-        initMap: function () {
-          mapboxgl.accessToken = "pk.eyJ1IjoidWNmbmhlbiIsImEiOiJja2x1Njg1cjMwMWVpMm9xbHM1ZW00MG9sIn0.W-ZPMO8all-8rO3ahmwWMQ";
-          this.beforeMap = new mapboxgl.Map({
-            container: "before",
-            style: "mapbox://styles/mapbox/light-v10",
-            center: [0, 51.5],
-            zoom: 9
-          });
-          this.afterMap = new mapboxgl.Map({
-            container: 'after',
-            style: 'mapbox://styles/mapbox/dark-v10',
-            center: [0, 51.5],
-            zoom: 9
-          });
+  </nav>
 
-          this.map = new mapboxgl.Compare(this.beforeMap, this.afterMap, '#comparison-container');
-          this.beforeMap.on('load', () => {
-            this.beforeMap.addSource('geojson1', {
-              type: "geojson",
-              data: geojson 
-            });
 
-            this.afterMap.addSource('geojson', {
-              type: "geojson",
-              data: geojson 
-            });
+ 
+  <section id="1">
+    <iframe src="introduction.html" height="100%" width="100%" frameBorder="1" scrolling="no"></iframe>
+  </section>
 
-          // this.beforeMap.addLayer({
-          //   id: "lineLabel",
-          //   type: "symbol",
-          //   source: "geojson1",
-          //   layout: {
-          //     "symbol-placement": "line-center",
-          //     "text-field": ["get", "name"],
-          //     "text-size": 12,
-          //     "text-offset": [0, 1],
-          //   },
-          // });
+  <section id="2">
+    <iframe src="policy.html" height="100%" width="100%" frameBorder="1" scrolling="no"></iframe>
+  </section>
+
+  <section id="3">
+    <iframe src="Waste.html" height="722px" width="100%" frameBorder="1" scrolling="no"></iframe>
+  </section>
+
+  <section id="4">
+    <iframe src="recycle.html" height="722px" width="100%" frameBorder="1"
+      scrolling="no"></iframe>
+  </section>
+  
+ <section id="5">
+    <iframe src="total_emission.html" height="100%" width="100%" frameBorder="1"
+      scrolling="no"></iframe>
+  </section>
+  
+ <section id="6">
+    <iframe src="emission_borough.html" height="722px" width="100%" frameBorder="1" scrolling="no"></iframe>
+  </section>
+
+  <section id="7">
+    <iframe src="2.5d.html" height="722px" width="100%" frameBorder="1" scrolling="yes"></iframe>
+  </section>
     
-            this.addBeforeLayer();
-            this.addAfterLayer();
-            this.addBeforeEvent();
-            this.addAfterEvent();
-          });
-        },
-        addBeforeLayer: function () {
-          this.beforeMap.addLayer({
-            id: `${this.beforeYear}label`,
-            type: "symbol",
-            source: "geojson1",
-            layout: {
-              "symbol-placement": "line-center",
-              "text-field": ["get", "name"],
-              "text-size": 16,
-              "text-offset": [0, 1],
-            },
-          });
-          this.beforeMap.addLayer({
-            id: `${this.beforeYear}`,
-            type: "fill",
-            source: "geojson1",
-            layout: {},
-            paint: {
-              "fill-color": {
-                property: `ratio_${this.beforeYear}`,
-                stops:  [
-                  [0.2, "yellow"],
-                  [0.4, "#fcd44a"],
-                  [0.6, "#f9b744"],
-                  [0.8, "#f38437"],
-                  [1, "#ee562c"],
-                  [10, "red"]
-                ],
-              },
-              "fill-opacity": 1,
-            },
-          });
-          // this.beforeMap.addLayer({
-          //   id: `${this.beforeYear}label`,
-          //   type: "symbol",
-          //   source: "geojson1",
-          //   layout: {
-          //     "symbol-placement": "line-center",
-          //     "text-field": ["get", "name"],
-          //     "text-size": 16,
-          //     "text-offset": [0, 1],
-          //   },
-          // });
-        },
-        addAfterLayer: function () {
-          this.afterMap.addLayer({
-            id: `${this.afterYear}`,
-            type: "fill",
-            source: "geojson",
-            layout: {},
-            paint: {
-              "fill-color": {
-                property: `ratio_${this.afterYear}`,
-                stops:  [
-                  [0.2, "yellow"],
-                  [0.4, "#fcd44a"],
-                  [0.6, "#f9b744"],
-                  [0.8, "#f38437"],
-                  [1, "#ee562c"],
-                  [10, "red"]
-                ],
-              },
-              "fill-opacity": 1,
-            },
-          });
-        },
+  <section id="8">
+    <iframe src="energy.html" height="722px" width="100%" frameBorder="1" scrolling="yes"></iframe>
+    </section>
 
-        addBeforeEvent: function(){
-          this.beforeMap.on('click', `${this.beforeYear}`, (e) => {
-            const currentYear = Object.keys(e.features[0].properties).find((o) => o.includes(this.beforeYear));
-            const html = `
-              <div style="font-size:14px">
-                <div>Year: ${this.beforeYear}</div>
-                <div>Area: ${e.features[0].properties.name}</div>
-                <div>Ratio: ${(e.features[0].properties[currentYear]).toFixed(2)}</div>
-              </div>
-            `
-            new mapboxgl.Popup().setLngLat(e.lngLat).setHTML(html).addTo(this.beforeMap);
-          });
-        },
-        addAfterEvent: function(){
-          this.afterMap.on('click', `${this.afterYear}`, (e) => {
-            const currentYear = Object.keys(e.features[0].properties).find((o) => o.includes(this.afterYear));
-            const html = `
-              <div style="font-size:14px">
-              <div>Year: ${this.afterYear}</div>
-              <div>Area: ${e.features[0].properties.name}</div>
-              <div>Ratio: ${(e.features[0].properties[currentYear]).toFixed(2)}</div>
-            </div>
-            `
-          new mapboxgl.Popup().setLngLat(e.lngLat).setHTML(html).addTo(this.afterMap);
-          });
-        },
-        removeBeforeLayer: function (){
-          ['2002', '2003', '2004', '2005', '2006', '2007'].map((o) => {
-            if (this.beforeMap.getLayer(o)) {
-              this.beforeMap.removeLayer(o);
-            }
-          });
-        },
-        removeAfterLayer: function (){
-          ['2008', '2009', '2010', '2011', '2012', '2013'].map((o) => {
-            if (this.afterMap.getLayer(o)) {
-              this.afterMap.removeLayer(o);
-            }
-          });
-        },
-        bindEvents: function () {
+  <section id="9">
+    <iframe src="conclusion.html" height="722px" width="100%" frameBorder="1" scrolling="yes"></iframe>
+    </section>
 
-          document.getElementById("slider1").addEventListener("input", (e) => {
-             this.beforeYear = Number(e.target.value);
-            $(".slider-value1").html(e.target.value);
-            this.removeBeforeLayer();
-            this.addBeforeLayer();
-            this.addBeforeEvent();
-          });
 
-          document.getElementById("slider2").addEventListener("input", (e) => {
-            this.afterYear = Number(e.target.value);
-            $(".slider-value2").html(e.target.value);
-            this.removeAfterLayer();
-            this.addAfterLayer();
-            this.addAfterEvent();
-          });
-        },
-      };
-      App.init();
-    </script>
-  </body>
+
+</body>
+
 </html>
