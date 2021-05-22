@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>Comparison map of energy</title>
+    <title>compare</title>
     <meta
       name="viewport"
       content="initial-scale=1,maximum-scale=1,user-scalable=no"
@@ -16,160 +16,221 @@
     <script charset="utf-8" src="https://cdnjs.cloudflare.com/ajax/libs/dimple/2.3.0/dimple.latest.min.js"></script>
     <script type="text/javascript" src="https://lib.baomitu.com/echarts/4.9.0-rc.1/echarts.js"></script>
     <script type="text/javascript" src="./static/geojson.js"></script>
-      
     <style>
-      
-     p{
-    font-size:14px;
-  }
-     h1 {
-    font-size: 20px;
-    line-height: 30px;
-  }
-
-     h2 {
-    font-size: 14px;
-    line-height: 20px;
-    margin-bottom: 10px;
-  }
-     h3{
-    font-size:8px;
-  }
-     h4{
-    font-size:14px;
-    margin:0px;
-    font-weight:normal;
-  }
-  a {
-    text-decoration: none;
-    color: #2DC4B2;
-  }
-   #iframe-shrink{transform:scale();left: -400px;top: -170px;}
-    .row {
-    height: 12px;
-    width: 100%;
-  }
-
-   .colors {
-    background: linear-gradient(to right,blue,red);
-    margin-bottom: 5px;
-  }
-   .slider {
-    margin-bottom: 20px;
-  }
-
-    html, body {
+      html, body {
         width: 100%;
         height: 100%;
         margin: 0;
         padding: 0;
         overflow: hidden;
-  }
-    .map {
+      }
+      .map {
         position: absolute;
         height: 100%;
         width: 100%;
         overflow: hidden;
-  }
+      }
     
-   .wrapper{
-        position: relative;
-        margin: 10px;
-        width: 240px;
-        background-color: white;
-        padding: 10px 20px;
-  }
-   .wrapper .title{
+      .wrapper{
+        position: absolute;
+        padding: 10px;
+        background: #fff;
+        top: 20px;
+        left: 20px;
+      }
+      .wrapper .title{
         font-size: 18px;
         margin-bottom: 10px;
-  }
-      
-    .label {
-        width: 15%;
-        display: inline-block;
-        text-align: center;
-  }
-    .echart-view{
+      }
+      .wrapper .slider:first-child{
+        margin-bottom: 20px;
+      }
+
+      .echart-view{
         position: absolute;
-        background-color: Gainsboro;
         right: 20px;
-        top: 320px;
-        width: 350px;
-        height: 360px;
+        top: 20px;
+        width: 300px;
+        height: 300px;
         padding: 10px;
-  }
-        .note{
-        font-size: 14px;
-        
-  }
+      }
+
     </style>
   </head>
 
   <body>
-
     <div id="comparison-container">
       <div id="before" class="map"></div>
       <div id="after" class="map"></div>
     </div>
     <div class="wrapper">
-      <div class="title">
-          <h1>The trend of road transport consumption for different fuels used in London boroughs </h1></div>
-         <h3>Note: We choosing the indicator of DIESEL cars/PETROL cars</h3>
-          <p> Dark style shows the past data (from 2002 to 2007), and light style shows the recent data (from 2008 to 2013) for compare. Also, the time point of 2007 is the year when London became the host city of 2012 Olympics</p>
-        <p> Checking the more information by clicking on the sepcific boroughs!</p>
-       <div class="slider">
-        <h2>Percentage</h2>
-      <div class="row colors">
-      </div>
-      <div class="row labels">
-        <div class="label">0.2</div>
-        <div class="label">0.4</div>
-        <div class="label">0.6</div>
-        <div class="label">0.8</div>
-        <div class="label">1.0</div>
-        <div class="label">10.0 </div>
-      </div>  
-        </div>      
+      <div class="title">The tend of energy source changed in London boroughs</div>
       <div class="slider">
-          <h2>Past year: <span class="slider-value1">2005</span> </h2>
+        <div>Before</div>
         <div class="slider-bar">
-          <input style="width:200px" id='slider1' type='range' min='2002' max='2007' step='1' value='2005' list='tickmarks' />
+          <input style="width:200px" id='slider1' type='range' min='2002' max='2007' step='1' value='2002' list='tickmarks' />
+          <span class="slider-value1">2002</span>
         </div>
       </div>
       <div class="slider">
-        <h2>Recent year:  <span class="slider-value2">2011</span> </h2>
+        <div>After</div>
         <div class="slider-bar">
-          <input style="width:200px" id='slider2' type='range' min='2008' max='2013' step='1' value='2011' list='tickmarks' />
+          <input style="width:200px" id='slider2' type='range' min='2008' max='2013' step='1' value='2008' list='tickmarks' />
+          <span class="slider-value2">2008</span>
         </div>
       </div>
-      <h3>Data of Road Transport Energy Consumption collected from  <a href="https://data.london.gov.uk/dataset/road-transport-energy-consumption-borough">London Datastore</a>.</h3> 
+      <div></div>
     </div>
     <div class="echart-view" id="chart"></div>
     <script>
-        const App = {
+      const App = {
         init: function () {
-          this.beforeYear = 2005;
-          this.afterYear = 2011;
+          this.beforeYear = 2002;
+          this.afterYear = 2008;
           this.bindEvents();
           this.initMap();
+          this.initChart();
         },
-            
-            initMap: function () {
-          mapboxgl.accessToken = "pk.eyJ1IjoiaG9uZzA3MDciLCJhIjoiY2tqdmUyMnB2MDgyZzJ2bXJpejlwbjdmNiJ9.BEIE3shUNtLrjrss0bmuRg";
+        initChart: function(){
+          this.myChart = echarts.init(document.getElementById('chart'));
+          const option =  {
+          backgroundColor: '#fff',
+          tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+              lineStyle: {
+                color: {
+                  type: 'linear',
+                  x: 0,
+                  y: 0,
+                  x2: 0,
+                  y2: 1,
+                  colorStops: [{
+                      offset: 0,
+                      color: 'rgba(0, 255, 233,0)'
+                  }, {
+                      offset: 0.5,
+                      color: 'rgba(255, 255, 255,1)',
+                  }, {
+                      offset: 1,
+                      color: 'rgba(0, 255, 233,0)'
+                  }],
+                  global: false
+                }
+              }
+            },
+            formatter: (params) => {
+              return `<div>ratio: ${(params[0].value).toFixed(4)}</div>`
+            }
+          },
+          grid: {
+            top: '15%',
+            left: '15%',
+            right: '5%',
+            bottom: '15%'
+          },
+          xAxis: [{
+            type: 'category',
+            axisLine: {
+                show: true
+            },
+            splitArea: {
+              color: '#f00',
+              lineStyle: {
+                color: '#f00'
+              },
+            },
+            axisLabel: {
+              color: '#000'
+            },
+            splitLine: {
+                show: false
+            },
+            boundaryGap: false,
+            data: [2002, 2003, 2004, 2005, 2006, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013]
+          }],
+          yAxis: [{
+            type: 'value',
+            name: 'ratio',
+            min: 0.08,
+            max: 0.1,
+            splitNumber: 4,
+            splitLine: {
+              show: true,
+              lineStyle: {
+                color: 'rgba(255,255,255,0.1)'
+              }
+            },
+            axisLine: {
+              show: true
+            },
+            axisLabel: {
+              show: true,
+              margin: 20,
+              textStyle: {
+                color: '#000'
+              },
+            },
+            axisTick: {
+              show: false,
+            },
+          }],
+          series: [{
+            name: 'ratio',
+            type: 'line',
+            smooth: true, //是否平滑
+            showAllSymbol: false,
+            symbol: 'circle',
+            symbolSize: 15,
+            label: {
+              show: false,
+              position: 'top',
+              textStyle: {
+                color: '#00b3f4'
+              }
+            },
+            itemStyle: {
+              color: "#00b3f4",
+              borderColor: "#fff",
+              borderWidth: 3,
+              shadowColor: 'rgba(0, 0, 0, .3)',
+              shadowBlur: 0,
+              shadowOffsetY: 2,
+              shadowOffsetX: 2
+            },
+            tooltip: {
+                show: true
+            },
+            areaStyle: {
+              normal: {
+                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                    offset: 0,
+                    color: 'rgba(0,179,244,0.3)'
+                  },
+                  {
+                    offset: 1,
+                    color: 'rgba(0,179,244,0)'
+                  }
+                ], false),
+              }
+            },
+            data: [0.08132865, 0.084739134, 0.086569239, 0.090149011, 0.094759455, 0.098030684, 0.096764763, 0.099229262, 0.098782928, 0.099031495, 0.096290185, 0.095626133]
+        }
+          ]};
+          this.myChart.setOption(option);
+        },
+        initMap: function () {
+          mapboxgl.accessToken = "pk.eyJ1IjoidWNmbmhlbiIsImEiOiJja2x1Njg1cjMwMWVpMm9xbHM1ZW00MG9sIn0.W-ZPMO8all-8rO3ahmwWMQ";
           this.beforeMap = new mapboxgl.Map({
             container: "before",
-            style: "mapbox://styles/hong0707/ckontmjx253qy17o25fm8lpd1",
-            center: [-0.1, 51.5],
-            minZoom: 9.3,
-            maxZoom: 13,
+            style: "mapbox://styles/mapbox/light-v10",
+            center: [0, 51.5],
             zoom: 9
           });
           this.afterMap = new mapboxgl.Map({
             container: 'after',
-            style: 'mapbox://styles/hong0707/ckontjb2e3s2z18ogbk3xf4xr',
-            center: [-0.1, 51.5],
-            minZoom: 9.3,
-            maxZoom: 13,
+            style: 'mapbox://styles/mapbox/dark-v10',
+            center: [0, 51.5],
             zoom: 9
           });
 
@@ -224,15 +285,15 @@
               "fill-color": {
                 property: `ratio_${this.beforeYear}`,
                 stops:  [
-                  [0.2, '#2636D9'],
-                  [0.4,'#2674D9'],
-                  [0.6,'#7126D9'],
-                  [0.8, '#D926D9'],
-                  [1,  '#D9264B'],
-                  [10, '#D9262B']
+                  [0.2, "yellow"],
+                  [0.4, "#fcd44a"],
+                  [0.6, "#f9b744"],
+                  [0.8, "#f38437"],
+                  [1, "#ee562c"],
+                  [10, "red"]
                 ],
               },
-              "fill-opacity": 0.85,
+              "fill-opacity": 1,
             },
           });
           // this.beforeMap.addLayer({
@@ -257,15 +318,15 @@
               "fill-color": {
                 property: `ratio_${this.afterYear}`,
                 stops:  [
-                   [0.2, '#2636D9'],
-                  [0.4,'#2674D9'],
-                  [0.6,'#7126D9'],
-                  [0.8, '#D926D9'],
-                  [1,  '#D9264B'],
-                  [10, '#D9262B']
+                  [0.2, "yellow"],
+                  [0.4, "#fcd44a"],
+                  [0.6, "#f9b744"],
+                  [0.8, "#f38437"],
+                  [1, "#ee562c"],
+                  [10, "red"]
                 ],
               },
-              "fill-opacity": 0.85,
+              "fill-opacity": 1,
             },
           });
         },
@@ -331,10 +392,5 @@
       };
       App.init();
     </script>
-      <div class="echart-view" id="note">
-          <iframe id="iframe-shrink"  src="speed.html" height="280px" width="350px" frameBorder="0" scrolling="no"></iframe> 
-          <p>Because of the global economic downturn and the riots of 2011, the speed rate of Bioenergy and waste decline sharply.</p>
-          </div>
-     
   </body>
 </html>
