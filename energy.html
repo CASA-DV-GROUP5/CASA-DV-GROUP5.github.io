@@ -93,10 +93,11 @@
       .wrapper {
         position: relative;
         margin: 10px;
-        width: 240px;
+        width: 300px;
         background-color: white;
         padding: 10px 20px;
-        height: 600px;
+        height: 500px;
+        opacity: 0.8;
       }
       .wrapper .title {
         font-size: 18px;
@@ -107,10 +108,6 @@
         width: 15%;
         display: inline-block;
         text-align: center;
-      }
-
-      .note {
-        font-size: 14px;
       }
 
       .txt-description{
@@ -134,23 +131,27 @@
     <div class="wrapper">
       <div class="title">
         <h1>
-         Renewable energy!
+         Consumptions of Bioenergy
         </h1>
       </div>
-      <h3>Note: We choosing the indicator of renewable energy/all fuels</h3>
+      <h3>Boroughs level (2005-2017)</h3>
       <p>
         Dark style shows the past data (from 2005 to 2011), and light style
         shows the recent data (from 2012 to 2017) for compare. 
         London host the Olympics in 2012, so we choose the time boundary of year 2012. 
+      
+      <h3>Note: We choosing the indicator of consumption of bioenergy/all fuels</h3>
+      
       <div class="slider">
         <h2>Percentage</h2>
         <div class="row colors"></div>
         <div class="row labels">
-          <div class="label">0.0</div>
+          <div class="label">0%</div>
           <div class="label">20%</div>
           <div class="label">40%</div>
           <div class="label">60%</div>
           <div class="label">80%</div>
+          <div class="label">100%</div>
         </div>
       </div>
       <div class="slider">
@@ -209,7 +210,7 @@
             "pk.eyJ1IjoiaG9uZzA3MDciLCJhIjoiY2tqdmUyMnB2MDgyZzJ2bXJpejlwbjdmNiJ9.BEIE3shUNtLrjrss0bmuRg";
           this.beforeMap = new mapboxgl.Map({
             container: "before",
-            style: "mapbox://styles/hong0707/ckontmjx253qy17o25fm8lpd1",
+            style: "mapbox://styles/mapbox/dark-v10",
             center: [-0.1, 51.5],
             minZoom: 9.3,
             maxZoom: 13,
@@ -217,7 +218,7 @@
           });
           this.afterMap = new mapboxgl.Map({
             container: "after",
-            style: "mapbox://styles/hong0707/ckontjb2e3s2z18ogbk3xf4xr",
+            style: "mapbox://styles/mapbox/light-v10",
             center: [-0.1, 51.5],
             minZoom: 9.3,
             maxZoom: 13,
@@ -289,6 +290,7 @@
                 ],
               },
               "fill-opacity": 0.85,
+              "fill-outline-color": "black",
             },
           });
           // this.beforeMap.addLayer({
@@ -323,6 +325,7 @@
                 ],
               },
               "fill-opacity": 0.85,
+              "fill-outline-color": "black",
             },
           });
         },
@@ -334,9 +337,7 @@
               <div style="font-size:14px">
                 <div>Year: ${this.beforeYear}</div>
                 <div>Area: ${e.features[0].properties.name}</div>
-                <div>Ratio: ${e.features[0].properties[currentYear].toFixed(
-                  2
-                )}</div>
+                <div>Percentage(%): ${((e.features[0].properties[currentYear])*100).toFixed(2)}</div>
               </div>
             `;
             new mapboxgl.Popup()
@@ -352,9 +353,7 @@
               <div style="font-size:14px">
               <div>Year: ${this.afterYear}</div>
               <div>Area: ${e.features[0].properties.name}</div>
-              <div>Ratio: ${e.features[0].properties[currentYear].toFixed(
-                2
-              )}</div>
+              <div>Percentage(%): ${((e.features[0].properties[currentYear])*100).toFixed(2)}</div>
             </div>
             `;
             new mapboxgl.Popup()
@@ -396,6 +395,113 @@
         },
       };
       App.init();
-    </script>
+ var size = 200;
+ 
+// implementation of CustomLayerInterface to draw a pulsing dot icon on the map
+// see https://docs.mapbox.com/mapbox-gl-js/api/#customlayerinterface for more info
+var pulsingDot = {
+width: size,
+height: size,
+data: new Uint8Array(size * size * 4),
+ 
+// get rendering context for the map canvas when layer is added to the map
+onAdd: function () {
+var canvas = document.createElement('canvas');
+canvas.width = this.width;
+canvas.height = this.height;
+this.context = canvas.getContext('2d');
+},
+ 
+// called once before every frame where the icon will be used
+render: function () {
+var duration = 1000;
+var t = (performance.now() % duration) / duration;
+ 
+var radius = (size / 2) * 0.3;
+var outerRadius = (size / 2) * 0.7 * t + radius;
+var context = this.context;
+ 
+// draw outer circle
+context.clearRect(0, 0, this.width, this.height);
+context.beginPath();
+context.arc(
+this.width / 2,
+this.height / 2,
+outerRadius,
+0,
+Math.PI * 2
+);
+context.fillStyle = 'rgba(255, 200, 200,' + (1 - t) + ')';
+context.fill();
+ 
+// draw inner circle
+context.beginPath();
+context.arc(
+this.width / 2,
+this.height / 2,
+radius,
+0,
+Math.PI * 2
+);
+context.fillStyle = 'rgba(255, 100, 100, 1)';
+context.strokeStyle = 'white';
+context.lineWidth = 2 + 4 * (1 - t);
+context.fill();
+context.stroke();
+ 
+// update this image's data with data from the canvas
+this.data = context.getImageData(
+0,
+0,
+this.width,
+this.height
+).data;
+ 
+// continuously repaint the map, resulting in the smooth animation of the dot
+map.triggerRepaint();
+ 
+// return `true` to let the map know that the image was updated
+return true;
+}
+};
+ 
+map.on('load', function () {
+map.addImage('pulsing-dot', pulsingDot, { pixelRatio: 2 });
+ 
+map.addSource('points', {
+'type': 'geojson',
+'data': {
+'type': 'FeatureCollection',
+'features': [
+{
+'type': 'Feature',
+'geometry': {
+'type': 'Point',
+'coordinates': [-0.0127, 51.5462]
+},
+    'properties': {
+        'title': 'Queen Elizabeth Olympic Park'
+    }
+}
+]
+}
+});
+map.addLayer({
+'id': 'points',
+'type': 'symbol',
+'source': 'points',
+'layout': {
+'icon-image': 'pulsing-dot',
+'text-field': ['get', 'title'],
+'text-font': [
+'Open Sans Semibold',
+'Arial Unicode MS Bold'
+],
+'text-offset': [0, 1.25],
+'text-anchor': 'top'
+}
+});
+});   
+   </script>
   </body>
 </html>

@@ -11,8 +11,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/bumbeishvili/d3-tip-for-v6@4/d3-tip.min.css">
     <title>Document</title>
     <style>
-
-
         body {
             margin: 0;
             box-sizing: content-box;
@@ -48,7 +46,6 @@
 </head>
 
 <body>
-
     <section class="chart">
         <div class="title">
             <h1>Waste management in London from 2003-2019</h1>
@@ -75,10 +72,10 @@
             }
 
             async handleData() {
-                this.data = await d3.csv("https://raw.githubusercontent.com/ZhengLiang-123/visualization/main/waste.csv");
+                this.data = await d3.csv("https://raw.githubusercontent.com/ZhengLiang-123/visualization/main/waste1.csv");
 
                 this.arr = Object.keys(this.data[0]).filter((d) => d !== "year")
-                this.color = ["#907fa4", "#a58faa", "#a6d6d6", "#ff7b54", "#da7f8f"];
+                this.color = ["#A52A2A", "#6495ED", "#a6d6d6", "#228B22", "#ff7b54"];
             }
 
             getLineData() {
