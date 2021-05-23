@@ -68,7 +68,7 @@
       }
 
       .colors {
-        background: linear-gradient(to right, blue, red);
+        background: linear-gradient(to right, #32e458,#eab71f,#e55720,#e55720,#800d2d,#441038);
         margin-bottom: 5px;
       }
       .slider {
@@ -96,7 +96,6 @@
         width: 240px;
         background-color: white;
         padding: 10px 20px;
-        overflow: scroll;
         height: 600px;
       }
       .wrapper .title {
@@ -109,15 +108,7 @@
         display: inline-block;
         text-align: center;
       }
-      /* .echart-view {
-        position: absolute;
-        background-color: Gainsboro;
-        right: 20px;
-        top: 320px;
-        width: 350px;
-        height: 360px;
-        padding: 10px;
-      } */
+
       .note {
         font-size: 14px;
       }
@@ -143,27 +134,23 @@
     <div class="wrapper">
       <div class="title">
         <h1>
-          The trend of road transport consumption for different fuels used in
-          London boroughs
+         Renewable energy!
         </h1>
       </div>
-      <h3>Note: We choosing the indicator of DIESEL cars/PETROL cars</h3>
+      <h3>Note: We choosing the indicator of renewable energy/all fuels</h3>
       <p>
-        Dark style shows the past data (from 2002 to 2007), and light style
-        shows the recent data (from 2008 to 2013) for compare. Also, the time
-        point of 2007 is the year when London became the host city of 2012
-        Olympics
-      </p>
-      <p>Checking the more information by clicking on the sepcific boroughs!</p>
+        Dark style shows the past data (from 2005 to 2011), and light style
+        shows the recent data (from 2012 to 2017) for compare. 
+        London host the Olympics in 2012, so we choose the time boundary of year 2012. 
       <div class="slider">
         <h2>Percentage</h2>
         <div class="row colors"></div>
         <div class="row labels">
-          <div class="label">0</div>
-          <div class="label">0.2</div>
-          <div class="label">0.4</div>
-          <div class="label">0.6</div>
-          <div class="label">0.8</div>
+          <div class="label">0.0</div>
+          <div class="label">20%</div>
+          <div class="label">40%</div>
+          <div class="label">60%</div>
+          <div class="label">80%</div>
         </div>
       </div>
       <div class="slider">
@@ -197,9 +184,9 @@
         </div>
       </div>
       <h3>
-        Data of Road Transport Energy Consumption collected from
+        Data collected from
         <a
-          href="https://data.london.gov.uk/dataset/road-transport-energy-consumption-borough"
+          href="https://data.london.gov.uk/dataset/consumption-other-fuels-borough"
           >London Datastore</a
         >.
       </h3>
@@ -212,7 +199,7 @@
       const App = {
         init: function () {
           this.beforeYear = 2005;
-          this.afterYear = 2011;
+          this.afterYear = 2012;
           this.bindEvents();
           this.initMap();
         },
@@ -292,12 +279,13 @@
               "fill-color": {
                 property: `YR${this.beforeYear}`,
                 stops: [
-                  [0.2, "#2636D9"],
-                  [0.4, "#2674D9"],
-                  [0.6, "#7126D9"],
-                  [0.8, "#D926D9"],
-                  [1, "#D9264B"],
-                  [10, "#D9262B"],
+                  [0.1, "#32e458"],
+                  [0.2, "#32e458"],
+                  [0.3, "#41ea1f"],
+                  [0.4, "#e56820"],
+                  [0.5, "#e55720"],
+                  [0.6, "#800d2d"],
+                  [0.7, "#441038"],
                 ],
               },
               "fill-opacity": 0.85,
@@ -325,12 +313,13 @@
               "fill-color": {
                 property: `YR${this.afterYear}`,
                 stops: [
-                  [0.2, "#2636D9"],
-                  [0.4, "#2674D9"],
-                  [0.6, "#7126D9"],
-                  [0.8, "#D926D9"],
-                  [1, "#D9264B"],
-                  [10, "#D9262B"],
+                  [0.1, "#32e458"],
+                  [0.2, "#32e458"],
+                  [0.3, "#41ea1f"],
+                  [0.4, "#e56820"],
+                  [0.5, "#e55720"],
+                  [0.6, "#800d2d"],
+                  [0.7, "#441038"],
                 ],
               },
               "fill-opacity": 0.85,
@@ -408,15 +397,5 @@
       };
       App.init();
     </script>
-    <!-- <div class="echart-view" id="note">
-      <iframe
-        id="iframe-shrink"
-        src="speed.html"
-        height="340px"
-        width="350px"
-        frameborder="0"
-        scrolling="no"
-      ></iframe>
-    </div> -->
   </body>
 </html>
