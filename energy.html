@@ -16,10 +16,11 @@
       href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-compare/v0.4.0/mapbox-gl-compare.css"
       type="text/css"
     />
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.css" rel="stylesheet" />
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.js"></script>
     <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-compare/v0.4.0/mapbox-gl-compare.js"></script>
     <script charset="utf-8" src="https://d3js.org/d3.v4.min.js"></script>
-    <!-- <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script> -->
     <script type="text/javascript" src="./static/jquery.js"></script>
     <script
       charset="utf-8"
@@ -29,7 +30,6 @@
       type="text/javascript"
       src="https://lib.baomitu.com/echarts/4.9.0-rc.1/echarts.js"
     ></script>
-    <!-- <script type="text/javascript" src="./static/geojson.js"></script> -->
     <script type="text/javascript" src="./static/Boroughs.js"></script>
     <style>
       p {
@@ -52,6 +52,12 @@
         font-size: 14px;
         margin: 0px;
         font-weight: normal;
+      }
+      h5 {
+        font-size: 14px;
+        margin-top: 10px;
+        margin-bottom: 0px;
+        font-weight: bold;
       }
       a {
         text-decoration: none;
@@ -110,16 +116,15 @@
         display: inline-block;
         text-align: center;
       }
-
-      .txt-description{
+      .description{
         position: absolute;
-        bottom: 10px;
+        bottom: 80px;
         right: 10px;
         background: #fff;
-        z-index: 10;
-        width: 200px;
-        height: 200px;
+        width: 430px;
+        height: 260px;
         padding: 10px;
+        opacity: 0.8;
       }
     </style>
   </head>
@@ -138,7 +143,7 @@
       <h3>Boroughs level (2005-2017)</h3>
       <p>
         Dark style shows the past data (from 2005 to 2011), and light style
-        shows the recent data (from 2012 to 2017) for compare. 
+        shows the recent data (from 2012 to 2017) for comparison. 
         London host the Olympics in 2012, so we choose the time boundary of year 2012. 
       
       <h3>Note: We choosing the indicator of consumption of bioenergy/all fuels</h3>
@@ -192,10 +197,44 @@
           >London Datastore</a
         >.
       </h3>
-    </div>
-    <div class="txt-description">
-      <div>xxxxxxxxxxx</div>
-      <div>描述文本</div>
+      </div>
+   
+    <div class="description" >
+      <h5>The popularity of bioenergy in different level of regions</h5>
+      <div id='chart_div'>
+    <script>
+      google.charts.load('current', {packages: ['corechart', 'line']});
+      google.charts.setOnLoadCallback(drawLineColors);
+
+      function drawLineColors() {
+      var data = new google.visualization.DataTable();
+      data.addColumn('number', 'X');
+      data.addColumn('number', 'Newham');
+      data.addColumn('number', 'East area');
+      data.addColumn('number', 'United Kingdom');
+
+      data.addRows([
+      [2005,10.66,4.97,5.54],[2006,11.57,5.45,5.82],[2007,11.62,6.79,6.92],[2008,15.14,7.13,7.76],
+      [2009,16.93,6.26,9.74],[2010,30.13,6.77,10.14],[2011,30.61,6.96,10.20],
+      [2012,23.15,11.27,11.78],[2013,27.64,16.34,13.42],[2014,25.73,16.31,14.69],
+      [2015,27.57,20.61,17.31],[2016,27.92,17.43,16.02],[2017,27.38,17.23,16.32]
+      ]);
+
+      var options = {
+        hAxis: {
+          title: 'Year'
+        },
+        vAxis: {
+          title: 'Bioenergy / All fuels (%)'
+        },
+        colors: ['#088E1F', '#8E1408','#08298E']
+      };
+
+      var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+      chart.draw(data, options);
+    }
+    </script></div>
+    <h3>Note:Newham with green; East part of London with red; UK with blue</h3>
     </div>
     <script>
       const App = {
@@ -232,15 +271,47 @@
             "#comparison-container"
           );
           this.beforeMap.on("load", () => {
+            
+            
             this.beforeMap.addSource("geojson1", {
               type: "geojson",
               data: geojson,
-            });
+            })
+            
+            this.beforeMap.addSource('points', {
+             'type': 'geojson',
+             'data': {
+             'type': 'FeatureCollection',
+             'features': [
+             {
+             'type': 'Feature',
+             'geometry': {
+             'type': 'Point',
+             'coordinates': [-0.0127, 51.5462]
+             },
+             'properties': {
+             'title': 'Olympic in borough of Newham'
+             }}]}});
 
             this.afterMap.addSource("geojson", {
               type: "geojson",
               data: geojson,
             });
+
+            this.afterMap.addSource('points', {
+             'type': 'geojson',
+             'data': {
+             'type': 'FeatureCollection',
+             'features': [
+             {
+             'type': 'Feature',
+             'geometry': {
+             'type': 'Point',
+             'coordinates': [-0.0127, 51.5462]
+             },
+             'properties': {
+             'title': 'Olympic in borough of Newham'
+             }}]}});
 
             // this.beforeMap.addLayer({
             //   id: "lineLabel",
@@ -291,20 +362,21 @@
                 ],
               },
               "fill-opacity": 0.85,
-              "fill-outline-color": "black",
+              "fill-outline-color": "white",
             },
           });
-          // this.beforeMap.addLayer({
-          //   id: `${this.beforeYear}label`,
-          //   type: "symbol",
-          //   source: "geojson1",
-          //   layout: {
-          //     "symbol-placement": "line-center",
-          //     "text-field": ["get", "name"],
-          //     "text-size": 16,
-          //     "text-offset": [0, 1],
-          //   },
-          // });
+          this.beforeMap.addLayer({
+               'id': 'points',
+               'type': 'symbol',
+               'source': 'points',
+               'layout': {
+               'text-field': ['get', 'title'],
+               'text-font': [
+               'Open Sans Semibold',
+               'Arial Unicode MS Bold'],
+               'text-offset': [0, 1.25],
+               'text-anchor': 'top'}});
+
         },
         addAfterLayer: function () {
           this.afterMap.addLayer({
@@ -326,9 +398,21 @@
                 ],
               },
               "fill-opacity": 0.85,
-              "fill-outline-color": "black",
+              "fill-outline-color": "white",
             },
           });
+          
+          this.afterMap.addLayer({
+               'id': 'points',
+               'type': 'symbol',
+               'source': 'points',
+               'layout': {
+               'text-field': ['get', 'title'],
+               'text-font': [
+               'Open Sans Semibold',
+               'Arial Unicode MS Bold'],
+               'text-offset': [0, 1.25],
+               'text-anchor': 'top'}});
         },
 
         addBeforeEvent: function () {
@@ -396,7 +480,6 @@
         },
       };
       App.init();
- 
-   </script>
+    </script>
   </body>
 </html>
