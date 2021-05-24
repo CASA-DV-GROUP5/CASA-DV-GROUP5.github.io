@@ -63,11 +63,7 @@
         text-decoration: none;
         color: #2dc4b2;
       }
-      #iframe-shrink {
-        transform: scale();
-        left: -400px;
-        top: -170px;
-      }
+
       .row {
         height: 12px;
         width: 100%;
@@ -116,6 +112,25 @@
         display: inline-block;
         text-align: center;
       }
+
+      .icon {
+        position: relative;
+        border:0px;
+        width:30px;
+        height:30px;
+      }
+      
+      .tip{
+        position: absolute;
+        top:100px;
+        right:200px;
+        background-image: url('icon.png');
+        width: 130px;
+        height: 70px;
+        padding: 10px;
+        opacity: 0.9;
+
+      }
       .description{
         position: absolute;
         bottom: 80px;
@@ -124,7 +139,7 @@
         width: 430px;
         height: 260px;
         padding: 10px;
-        opacity: 0.8;
+        opacity: 0.9;
       }
     </style>
   </head>
@@ -199,7 +214,12 @@
       </h3>
       </div>
    
-    <div class="description" >
+     <div class='tip' id='icon'>
+       <h3>Tips: Clicking on the borough of Newham which has hosted the Olympics</h3></div>
+     </div>
+     
+
+    <div class='description'>
       <h5>The popularity of bioenergy in different level of regions</h5>
       <div id='chart_div'>
     <script>
