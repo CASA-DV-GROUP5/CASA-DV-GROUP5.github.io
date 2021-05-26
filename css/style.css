@@ -156,16 +156,16 @@ section {
 	transition: all 0.2s ease-in-out;
 }
 .navbar-default .navbar-brand {
-	background-image: url(../image/006.jpg);
+	background-image: url(../image/CASALogo.png);
 }
 .navbar-shrink .navbar-brand {
-	background-image: url(../image/006.jpg);
+	background-image: url(../image/CASALogo.png);
 }
 .navbar-transparent .navbar-brand {
-	background-image: url(../image/006.jpg);
+	background-image: url(../image/CASALogo.png);
 }
 .navbar-inverse .navbar-brand {
-	background-image: url(../image/006.jpg);
+	background-image: url(../image/CASALogo.png);
 }
 
 /* Navbar links */
