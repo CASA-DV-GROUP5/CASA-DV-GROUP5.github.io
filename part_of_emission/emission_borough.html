@@ -70,6 +70,7 @@
         }
 
 
+
       .map-overlay label {
           font: 16px/18px 'Helvetica Neue', Arial, Helvetica, sans-serif;
           color: #ffffff;
@@ -264,7 +265,10 @@
         position: relative;
         /*bottom: 10px;*/
     }
-
+    .data{
+        position: relative;
+        margin-top: 5px;
+    }
    </style>
 
 
@@ -325,10 +329,13 @@
 		
           </tr></table>
         
+        <div id='data'><h4>Data:
+             <a href="https://data.london.gov.uk/dataset/london-atmospheric-emissions-inventory--laei--2016" target="_blank">London Datastore </a></h4>.
+        </div>
         
         <div id="legend">
             <div class="legendb">
-                <h4>Emission Volume (tonnes/year) </h4>
+                <h4>Emission Volume (tons) </h4>
                 <div><span300plus></span300plus><text style="bottom: 10px">6,000+</text></div>
                 <div><span300></span300><text style="bottom: 7.5px">5,001-6,000</text></div>
                 <div><span200></span200><text style="bottom: 5px">4,001-5,000</text></div>
@@ -339,7 +346,7 @@
 
         <div id="legend2">
             <div class="legendb">
-                <h4>Emission Volume (tonnes/year) </h4>
+                <h4>Emission Volume (tons) </h4>
                 <div><span300plus></span300plus><text style="bottom: 10px">600+</text></div>
                 <div><span300></span300><text style="bottom: 7.5px">501-600</text></div>
                 <div><span200></span200><text style="bottom: 5px">401-500</text></div>
@@ -350,7 +357,7 @@
 
         <div id="legend3">
             <div class="legendb">
-                <h4>Emission Volume (tonnes/year) </h4>
+                <h4>Emission Volume (tons) </h4>
                 <div><span300plus></span300plus><text style="bottom: 10px">360+</text></div>
                 <div><span300></span300><text style="bottom: 7.5px">301-360</text></div>
                 <div><span200></span200><text style="bottom: 5px">241-300</text></div>
@@ -361,7 +368,7 @@
 
         <div id="legend4">
             <div class="legendb">
-                <h4>Emission Volume (tonnes/year) </h4>
+                <h4>Emission Volume (tons) </h4>
                 <div><span300plus></span300plus><text style="bottom: 10px">2,700,000+</text></div>
                 <div><span300></span300><text style="bottom: 7.5px">2,250,001-2,700,000</text></div>
                 <div><span200></span200><text style="bottom: 5px">1,800,001-2,250,000</text></div>
@@ -407,6 +414,8 @@ var years = [
     ];
 
 
+
+    
     map.on('load', function() {    // This is our first example of asynchronous JS. We can only add additional layers after the map has loaded
 
         // This is the main function that runs when the user changes the data year

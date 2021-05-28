@@ -207,7 +207,12 @@
             height: 40px;
             padding: 5px 10px;
         }
-
+        
+        .data {
+        position: relative;
+        margin-top: 5px;
+        }
+        
    </style>
 
 
@@ -223,7 +228,7 @@
         <h3>Grid level (2010-2016)</h3>
 
         <div id="intro">
-            <p>This map shows emissions of NOx, PM10, PM2.5 and CO2 in tonnes/year at a 1km grid square resolution in Greater London Area. 
+            <p>This map shows emissions of NOx, PM10, PM2.5 and CO2 in tons at a 1km grid square resolution in Greater London Area. 
             Note that some of the grids are further cut with borough boundaries.</p></div>
         
     
@@ -277,7 +282,7 @@
           </tr></table>
         
         
-        <h5>Emission Volume (tonnes/year/km2)</h5>
+        <h5>Emission Volume (tons/km2)</h5>
           <div id="legend">
               <div class='row colors'></div>
               <div class='legendLabel'>0</div>
@@ -321,7 +326,10 @@
             <div class='legendLabel'>100000</div>
 
       </div>
-
+      <div id='data'><h4>Data:
+        <a href="https://data.london.gov.uk/dataset/london-atmospheric-emissions-inventory--laei--2016" target="_blank">London Datastore </a></h4>.
+      </div>
+    
         
 
 

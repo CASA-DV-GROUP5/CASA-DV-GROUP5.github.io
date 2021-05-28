@@ -109,7 +109,7 @@
       <h2>Year: <label id="active-year">2003</label></h2>
       <input id="slider" class="row" type="range" min="2003" max="2019" step="1" value="2003" />
         
-     <h2> Data is from: <a href="https://data.london.gov.uk/dataset/london-borough-profiles/">London datastore</a></h2>
+     <h2> Data is from: <a href="https://data.london.gov.uk/dataset/london-borough-profiles/" target="_blank">London datastore</a></h2>
         
     </div>
     <div class="session">
@@ -255,7 +255,6 @@
 
         } else {
           map.setFilter("lahighlight", ["==", "name", "null"]);
-          console.log("No features");
           document.getElementById("laname").innerHTML =
             "Hover over a local authority";
         }
@@ -290,7 +289,6 @@
         d.properties = { ...d };
         d.geometry = value.geometry;
       });
-      console.log('recycle', recycle)
       return recycle;
     }
 
@@ -298,7 +296,6 @@
       let name = la[0].properties.name;
       let year = d3.select("#slider").property("value");
       let value = source.find((d) => d.year === +year && d.borough === name);
-      console.log(value, source, name, year);
       d3.select("#RecycleValue").html(value?.value);
     }
 
@@ -308,7 +305,6 @@
     class Line {
       constructor(data, id, title) {
         this.data = JSON.parse(JSON.stringify(data));
-        console.log(this.data)
         if (this.data.length > 0) {
           this.id = id;
           this.title = title;

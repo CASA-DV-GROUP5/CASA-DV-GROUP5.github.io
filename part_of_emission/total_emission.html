@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -39,7 +39,7 @@
 
         
         section {
-        padding: 100px 0;
+        padding: 50px 0;
         }
 
         .section-bg {
@@ -48,7 +48,8 @@
 
         .section-title {
         text-align: center;
-        padding-bottom: 50px;
+        padding-bottom: 10px;
+        margin-top: 10px;
         }
         
         .section content {
@@ -155,10 +156,52 @@
        
         
         <div class="container">
+            
+
+            <div class="row">
+                <p>
+                    By looking at London's air pollutant emissions at all levels, it can be seen that overall, 
+                    there is a significant decrease for all pollutant from 2010 to 2013. However, during the 
+                    period from 2013 to 2016, PM10 and CO2 faced a certain degree of rebound, although the downward 
+                    trend in NOx and PM2.5 emissions was maintained.
+                   </p>
+            </div>
+           
+
+            <div class="row">
+              <div class="col">
+                NOx (tons)
+                <div id="svgBar1"></div>
+              </div>
+              <div class="col">
+                PM10 (tons)
+                <div id="svgBar2"></div>
+              </div>
+              <div class="col">
+                PM2.5 (tons)
+                <div id="svgBar3"></div>
+              </div>
+              <div class="col">
+                CO2 (tons)
+                <div id="svgBar4"></div>
+              </div>
+              <div class="col">
+                Legend 
+                <div id="svgBar5" ></div>
+              </div>
+            </div>
+
+
+
             <div class="row-py5">
                 <div class="col">
-                <p>
-                    The chart on the right shows London population change from 2010 to 2016. 
+                    <p>
+                          
+                    </p>
+                    <p>
+                        It is possible that this is due to the concentration of measures that caused a qualitative change in emissions by 2013. 
+                        After that, the speed of emission improvement after the Olympics will definitely slow down or even be offset by more economic activities 
+                        due to population growth. 
                    </p>
                 </div>
             </div>
@@ -168,36 +211,7 @@
                     <div id="linechart1" style="width: 100%; height: 160%" ></div>
                     </div>
             </div>
-
-            <div class="row">
-                <p>
-                    The charts below show volumes of each pollutants with main source categories in London from 2010 to 2016. 
-                   </p>
-            </div>
-           
-
-            <div class="row">
-              <div class="col">
-                NOx (tonnes)
-                <div id="svgBar1"></div>
-              </div>
-              <div class="col">
-                PM10 (tonnes)
-                <div id="svgBar2"></div>
-              </div>
-              <div class="col">
-                PM2 (tonnes)
-                <div id="svgBar3"></div>
-              </div>
-              <div class="col">
-                CO2 (tonnes)
-                <div id="svgBar4"></div>
-              </div>
-              <div class="col">
-                Legend 
-                <div id="svgBar5" ></div>
-              </div>
-            </div>
+            
           </div>
 
 
@@ -321,120 +335,7 @@
         }
 
 
-            /*
-            // set the dimensions and margins of the graph
-    var margin0 = {top: 20, right: 0, bottom: 50, left: 80},
-    width0 = 400 - margin0.left - margin0.right,
-    height0 = 220 - margin0.top - margin0.bottom;
-
-
-    // append the svg object to the body of the page
-    var svg0 = d3.select("#linechart")
-    .append("svg")
-    .attr("width", width0 + margin0.left + margin0.right)
-    .attr("height", height0 + margin0.top + margin0.bottom)
-    .append("g")
-    .attr("transform",
-          "translate(" + margin0.left + "," + margin0.top + ")");
-
-    //Read the data
-    d3.csv("https://raw.githubusercontent.com/yiminf5/visualization/main/london_pop_10-16.csv", function(data) {
-
-    
-
-    // Add X axis --> it is a date format
-    var x = d3.scaleBand()
-        .domain(d3.map(data, function (d) { return (d.year) }).keys())
-        .range([ 0, width0 ]);
-    svg0.append("g")
-        .attr("transform", "translate(0," + height0 + ")")
-        .call(d3.axisBottom(x));
-
-    // Add Y axis
-    var y = d3.scaleLinear()
-        .domain( [0,10000000])
-        .range([ height0, 0 ]);
-    svg0.append("g")
-        .call(d3.axisLeft(y).ticks(5));
-
-    // Initialize line with group a
-    var line = svg0
-        .append('g')
-        .append("path")
-        .datum(data)               
-        .attr("d", d3.line()
-            .x(function(d) { return x(+d.year) })
-            .y(function(d) { return y(+d.population) })
-        )
-        .attr("stroke", "black")
-        .style("stroke-width", 4)
-        .style("fill", "none")
-
-
-    // create a tooltip
-    var tooltip1 = d3.select("#linechart")
-                .append("div")
-                .style("opacity", 0)
-                .attr("class", "tooltip1")
-                .style("background-color", "white")
-                .style("border", "solid")
-                .style("border-width", "2px")
-                .style("border-radius", "5px")
-                .style("padding", "10px")
-
-      // Three function that change the tooltip when user hover / move / leave a cell
-        var mouseover = function(d) {
-        tooltip1
-        .html( "Value: " + d.population)
-        .transition()
-        .duration(800) //longer to easier be seen
-        .style("opacity", 0.9)
-
-        }
-
-        var mousemove = function(d) {
-        tooltip1
-
-        .style("left", (d3.mouse(this)[0]+70) + "px")
-        .style("top", (d3.mouse(this)[1]) + "px")
-        }
-
-        var mouseleave = function(d) {
-        tooltip1
-
-        .style("opacity", 0)
-
-
-        }
-
-
-        svg0
-        .append("g")
-        .selectAll("dot")
-        .data(data)
-        .enter()
-        .append('circle')
-        .attr("class", "myCircle")
-        .attr("cx", function(d) { return x(+d.year) })
-        .attr("cy", function(d) { return y(+d.population) })
-        .attr("r", 7)
-        .attr("stroke", "#69b3a2")
-        .attr("stroke-width", 3)
-        .attr("fill", "white")
-        .on("mouseover", mouseover)
-        .on("mousemove", mousemove)
-        .on("mouseleave", mouseleave)
-
-
-    })
-
-
-
-
-
-*/
-
-
+        
 
 
             
@@ -468,9 +369,9 @@
             
                 .domain([0, max])
                 .range([height, 0]);
-                
+           //append axis color，set ticks    
             svg.append("g")
-            .attr("class", "axisRed")
+                .attr("class", "axisRed")
                 .call(d3.axisLeft(y).ticks(5));
                 
                 
@@ -480,6 +381,7 @@
                 .domain(subgroups)
                 .range(cs)
 
+                //stack generator
             var stackedData = d3.stack()
                 .keys(subgroups)
                 (data)

@@ -70,7 +70,13 @@
       }
 
       .colors {
-        background: linear-gradient(to right, #32e458,#eab71f,#e55720,#e55720,#800d2d,#441038);
+        background: linear-gradient(to right, 
+          #fff,
+          #a9cbae,
+          #63ac64,
+          #3b993b,
+          #13880f,
+          darkgreen);
         margin-bottom: 5px;
       }
       .slider {
@@ -209,7 +215,7 @@
       <h3>
         Data collected from
         <a
-          href="https://data.london.gov.uk/dataset/consumption-other-fuels-borough"
+          href="https://data.london.gov.uk/dataset/consumption-other-fuels-borough" target="_blank"
           >London Datastore</a
         >.
       </h3>
@@ -320,19 +326,21 @@
             });
 
             this.afterMap.addSource('point2', {
-             'type': 'geojson',
-             'data': {
-             'type': 'FeatureCollection',
-             'features': [
-             {
-             'type': 'Feature',
-             'geometry': {
-             'type': 'Point',
-             'coordinates': [-0.0127, 51.5462]
-             },
-             'properties': {
-             'title': 'Olympic in borough of Newham'
-             }}]}});
+              'type': 'geojson',
+              'data': {
+                'type': 'FeatureCollection',
+                'features': [{
+                  'type': 'Feature',
+                  'geometry': {
+                    'type': 'Point',
+                    'coordinates': [-0.0127, 51.5462]
+                  },
+                  'properties': {
+                    'title': 'Olympic in borough of Newham'
+                  }
+                }]
+              }
+            });
 
             // this.beforeMap.addLayer({
             //   id: "lineLabel",
@@ -373,13 +381,13 @@
               "fill-color": {
                 property: `YR${this.beforeYear}`,
                 stops: [
-                  [0.1, "#32e458"],
-                  [0.2, "#32e458"],
-                  [0.3, "#41ea1f"],
-                  [0.4, "#e56820"],
-                  [0.5, "#e55720"],
-                  [0.6, "#800d2d"],
-                  [0.7, "#441038"],
+                  [0.1, "#fff"],
+                  [0.2, "#a9cbae"],
+                  [0.3, "#63ac64"],
+                  [0.4, "#3b993b"],
+                  [0.5, "#13880f"],
+                  [0.6, "#11740D"],
+                  [0.7, "#0A5108"],
                 ],
               },
               "fill-opacity": 0.85,
@@ -409,13 +417,13 @@
               "fill-color": {
                 property: `YR${this.afterYear}`,
                 stops: [
-                  [0.1, "#32e458"],
-                  [0.2, "#32e458"],
-                  [0.3, "#41ea1f"],
-                  [0.4, "#e56820"],
-                  [0.5, "#e55720"],
-                  [0.6, "#800d2d"],
-                  [0.7, "#441038"],
+                  [0.1, "#fff"],
+                  [0.2, "#a9cbae"],
+                  [0.3, "#63ac64"],
+                  [0.4, "#3b993b"],
+                  [0.5, "#13880f"],
+                  [0.6, "#11740D"],
+                  [0.7, "#0A5108"],
                 ],
               },
               "fill-opacity": 0.85,

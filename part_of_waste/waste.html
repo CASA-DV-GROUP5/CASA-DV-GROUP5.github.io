@@ -17,30 +17,36 @@
             background-image: url('../image/chart.jpg');
             background-size: 100% 100%;
             background-attachment: fixed;
+
         }
 
         .title,
         .content,
         #line {
             /* background-color: lightgray; */
-            border-radius: 10px;
-            margin: 10px;
+            border-radius: 8px;
+            margin: 8px;
 
         }
 
-        .title,
+        .title{
+             color: #2d6760;
+            text-align: center;
+        }
         .content {
             text-align: justify;
+            color: #555;
         }
 
         .chart {
-
+            border-style: solid;
+            border-width: 2px;
             display: grid;
             grid-template-rows: 10% 38% 50%;
             width: 50vw;
-            height: 100vh;
-            margin: 0 5%;
-            background-color: lightgray;
+            margin: 0 6%;
+            height: 717px;
+            background-color: #ffffff;
         }
     </style>
 </head>
@@ -99,7 +105,7 @@
                 let div = d3.select(`#${this.id}`);
                 this.getWH(div);
 
-                this.margin = { left: 60, right: 20, top: 30, bottom: 30 };
+                this.margin = { left: 60, right: 20, top: 40, bottom: 30 };
                 this.innerW = this.width - this.margin.left - this.margin.right;
                 this.innerH = this.height - this.margin.top - this.margin.bottom;
                 this.svg = div
